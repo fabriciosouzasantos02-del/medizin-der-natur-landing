@@ -159,11 +159,27 @@ export default function Home() {
   const [locale, setLocale] = useState<Locale>("de");
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [legalOpen, setLegalOpen] = useState(false);
+
+  const carouselItems = [
+    { src: COVER, alt: "Medizin der Natur — Buchcover" },
+    { src: INGREDIENTS, alt: "Natürliche Zutaten und Heilpflanzen" },
+    { src: PREPARATION, alt: "Zubereitung einer natürlichen Rezeptur" },
+    { src: APPLICATIONS, alt: "Natürliche Anwendungen und Hausmittel" },
+  ];
 
   useEffect(() => {
     const lang = navigator.languages?.[0] || navigator.language || "de";
     setLocale(lang.toLowerCase().startsWith("pt") ? "pt" : "de");
   }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setCarouselIndex((current) => (current + 1) % carouselItems.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [carouselItems.length]);
 
   const t = copy[locale];
   const categoryIcons = useMemo(() => ["✦", "◌", "✧", "◈", "⋆"], []);
@@ -205,7 +221,14 @@ export default function Home() {
             </div>
             <div className="hero-product">
               <div className="halo" />
-              <img src={COVER} alt="Medizin der Natur — capa do e-book" />
+              <div className="hero-carousel" aria-roledescription="carousel" aria-label={locale === "de" ? "Buch- und Inhaltsbilder" : "Imagens do livro e conteúdo"}>
+                <div className="hero-carousel-track" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
+                  {carouselItems.map((item) => <div className="hero-carousel-slide" key={item.src}><img src={item.src} alt={item.alt} /></div>)}
+                </div>
+                <div className="hero-carousel-controls">
+                  {carouselItems.map((item, i) => <button key={item.src} className={carouselIndex === i ? "is-active" : ""} onClick={() => setCarouselIndex(i)} aria-label={`${locale === "de" ? "Bild" : "Imagem"} ${i + 1}`} />)}
+                </div>
+              </div>
               <div className="hero-stamp"><strong>300</strong><span>{locale === "de" ? "NATÜRLICHE LÖSUNGEN" : "SOLUÇÕES NATURAIS"}</span></div>
             </div>
           </div>
@@ -281,7 +304,8 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><a href={`mailto:kontakt@medizin-der-natur.de`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></footer>
+      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>{locale === "de" ? "Rechtliche Hinweise" : "Avisos legais"}</button><a href={`mailto:kontakt@medizin-der-natur.de`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>
+      {legalOpen && <div className="legal-modal-backdrop" role="presentation" onClick={() => setLegalOpen(false)}><section className="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title" onClick={(event) => event.stopPropagation()}><button className="legal-close" onClick={() => setLegalOpen(false)} aria-label={locale === "de" ? "Schließen" : "Fechar"}>×</button><SectionLabel>{locale === "de" ? "RECHTLICHE HINWEISE" : "AVISOS LEGAIS"}</SectionLabel><h2 id="legal-title">{locale === "de" ? "Hinweise zum digitalen Material" : "Informações sobre o material digital"}</h2><p>{locale === "de" ? "Dieses E-Book dient der allgemeinen Information über traditionelles Pflanzenwissen. Die Inhalte ersetzen keine individuelle medizinische Beratung, Diagnose oder Behandlung." : "Este e-book tem finalidade informativa sobre conhecimentos tradicionais de plantas. O conteúdo não substitui orientação médica individual, diagnóstico ou tratamento."}</p><p>{locale === "de" ? "Bitte prüfen Sie Zutaten, Allergien und persönliche Verträglichkeit sorgfältig und wenden Sie sich bei gesundheitlichen Fragen an qualifiziertes Fachpersonal." : "Verifique ingredientes, alergias e sua tolerância individual. Em caso de dúvidas de saúde, procure um profissional qualificado."}</p></section></div>}
     </div>
   );
 }

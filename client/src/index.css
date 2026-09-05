@@ -72,7 +72,13 @@ button { border: 0; }
 .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-soft); font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .hero-note { display: flex; align-items: center; gap: 8px; margin-top: 24px; color: rgba(248,244,234,.55); font-size: 11px; }
 .hero-product { position: relative; justify-self: end; width: min(100%, 420px); }
-.hero-product img { position: relative; z-index: 1; display: block; width: 84%; margin-left: auto; filter: drop-shadow(0 30px 28px rgba(0,0,0,.48)); transform: rotate(2deg); }
+.hero-carousel { position: relative; z-index: 1; width: 84%; margin-left: auto; overflow: hidden; filter: drop-shadow(0 30px 28px rgba(0,0,0,.48)); transform: rotate(2deg); }
+.hero-carousel-track { display: flex; transition: transform .55s cubic-bezier(.23,1,.32,1); }
+.hero-carousel-slide { flex: 0 0 100%; min-width: 100%; }
+.hero-carousel-slide img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+.hero-carousel-controls { position: absolute; z-index: 2; left: 50%; bottom: 13px; display: flex; gap: 6px; transform: translateX(-50%) rotate(-2deg); }
+.hero-carousel-controls button { width: 7px; height: 7px; padding: 0; border: 1px solid rgba(248,244,234,.85); border-radius: 50%; background: transparent; cursor: pointer; transition: transform .18s ease, background .18s ease; }
+.hero-carousel-controls button.is-active { background: var(--gold-soft); transform: scale(1.45); }
 .halo { position: absolute; width: 82%; aspect-ratio: 1; right: 0; top: 3%; border: 1px solid rgba(223,196,134,.45); border-radius: 50%; box-shadow: 0 0 0 23px rgba(223,196,134,.06), 0 0 0 46px rgba(223,196,134,.035); }
 .hero-stamp { position: absolute; z-index: 2; left: 4%; bottom: 9%; display: grid; place-items: center; width: 106px; height: 106px; padding: 15px; color: var(--gold-soft); border: 1px solid var(--gold); border-radius: 50%; background: rgba(9,31,18,.9); box-shadow: 0 8px 30px rgba(0,0,0,.35); text-align: center; }
 .hero-stamp strong { font: 600 41px/.7 'Cormorant Garamond', serif; }
@@ -162,6 +168,13 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
 .footer-brand, .site-footer a { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .site-footer p { max-width: 520px; margin: 0; line-height: 1.5; text-align: center; }
 .site-footer a { color: var(--gold-soft); }
+.footer-links { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+.legal-link { padding: 0; color: rgba(248,244,234,.7); background: transparent; font-size: 10px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.legal-modal-backdrop { position: fixed; z-index: 100; inset: 0; display: grid; place-items: center; padding: 20px; background: rgba(3,12,7,.78); backdrop-filter: blur(9px); }
+.legal-modal { position: relative; width: min(100%, 590px); padding: 40px; color: var(--ink); background: var(--paper); box-shadow: 0 28px 70px rgba(0,0,0,.42); }
+.legal-modal h2 { margin-bottom: 18px; font-size: 43px; }
+.legal-modal p { margin: 0 0 13px; color: #62695f; font-size: 13px; line-height: 1.72; }
+.legal-close { position: absolute; top: 10px; right: 16px; padding: 4px 8px; color: var(--forest); background: transparent; font-size: 28px; line-height: 1; cursor: pointer; }
 
 @media (max-width: 900px) {
   .top-nav { gap: 17px; margin-right: 15px; }
@@ -191,7 +204,7 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .hero-inner { display: flex; flex-direction: column; align-items: stretch; gap: 32px; }
   .hero h1 { font-size: clamp(44px, 14vw, 65px); }
   .hero-product { width: min(75vw, 310px); margin: 0 auto; }
-  .hero-product img { width: 87%; }
+  .hero-carousel { width: 87%; }
   .hero-stamp { width: 82px; height: 82px; padding: 10px; left: 0; bottom: 7%; }
   .hero-stamp strong { font-size: 30px; }
   .hero-stamp span { font-size: 6px; }
@@ -225,4 +238,5 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .faq-list { margin-top: 40px; }
   .site-footer { flex-direction: column; text-align: center; }
   .site-footer p { order: 3; }
+  .footer-links { flex-direction: column; gap: 10px; }
 }
