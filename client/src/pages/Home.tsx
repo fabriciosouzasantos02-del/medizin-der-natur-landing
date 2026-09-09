@@ -24,7 +24,7 @@ const OPEN_BOOK_RECIPE = "/assets/open-book-recipe.png";
 const PRICE_ART = "/assets/premium-book-price.jpeg";
 const GUARANTEE_SEAL = "/assets/premium-guarantee-seal.png";
 
-type Locale = "de" | "pt";
+type Locale = "de";
 
 const copy = {
   de: {
@@ -84,63 +84,6 @@ const copy = {
     disclaimer: "Traditionelles Informationsmaterial. Es ersetzt keine individuelle Beratung durch medizinisches Fachpersonal.",
     language: "Sprache",
   },
-  pt: {
-    nav: { contents: "Conteúdo", method: "Método", offer: "Oferta", faq: "FAQ" },
-    heroEyebrow: "O CONHECIMENTO OCULTO DA NATUREZA",
-    heroTitle: "Mais de 300 preparações tradicionais para uma vida mais consciente.",
-    heroText:
-      "Um guia prático premium com chás, garrafadas, banhos, pomadas e aplicações naturais tradicionais — explicado com clareza, passo a passo.",
-    heroCta: "Garantir meu exemplar",
-    heroNote: "Acesso digital imediato · Formato PDF",
-    kicker: "01 / A PROPOSTA",
-    problemTitle: "Voltar ao que a natureza sempre ofereceu.",
-    problemText:
-      "Entre ervas, raízes, folhas e ingredientes simples da cozinha existe um repertório transmitido por gerações. Medicina da Natureza organiza esse conhecimento com quantidades, preparo e formas de uso fáceis de consultar.",
-    pull: "Conhecimento tradicional. Organização prática. Para o dia a dia.",
-    productKicker: "02 / O LIVRO",
-    productTitle: "A enciclopédia prática da saúde dos nossos antepassados.",
-    productText:
-      "Não é uma coleção solta. Cada solução segue a mesma estrutura: objetivo, ingredientes, preparo, aplicação e observações — para você encontrar rapidamente o que procura.",
-    productPoints: ["300 soluções numeradas", "Chás, garrafadas, banhos, pomadas e compressas", "Instruções práticas passo a passo", "PDF digital para ler imediatamente"],
-    learnKicker: "03 / O QUE VOCÊ VAI DESCOBRIR",
-    learnTitle: "Um caminho claro pela farmácia natural de casa.",
-    learnText: "O conteúdo é organizado por regiões do corpo e situações do cotidiano — da consulta à aplicação prática.",
-    categories: [
-      ["Fígado, rins e bile", "Aplicações tradicionais com plantas e alimentos para o conhecimento natural do dia a dia."],
-      ["Coração e circulação", "Receitas tradicionais e rotinas conscientes para o bem-estar."],
-      ["Dores e inflamações", "Compressas, banhos, óleos e aplicações externas."],
-      ["Estômago e digestão", "Chás, preparações leves e ingredientes da cozinha."],
-      ["Sistema nervoso e imunidade", "Rituais noturnos, conhecimento de ervas e aliados naturais."],
-    ],
-    methodKicker: "04 / COMO FUNCIONA",
-    methodTitle: "Do ingrediente à aplicação pronta — sem rodeios.",
-    methodText: "Cada receita é apresentada para que você acompanhe os passos de forma intuitiva.",
-    methodCards: [
-      ["Ingredientes exatos", "Raízes, folhas, cascas, sementes e itens da cozinha — com medidas e alternativas."],
-      ["Preparo detalhado", "Tempo de cozimento, infusão, recipientes e ordem explicados com clareza."],
-      ["Aplicação prática", "Infusões, banhos, compressas, pomadas e xaropes com instruções objetivas."],
-    ],
-    offerKicker: "05 / SEU EXEMPLAR",
-    offerTitle: "Um acervo inteiro de conhecimento. Pelo preço de uma pequena pausa no dia.",
-    pricePrefix: "Apenas",
-    access: "Acesso digital imediato em PDF",
-    buy: "Garantir meu exemplar agora",
-    guarantee: "Garantia de satisfação de 15 dias",
-    guaranteeText: "Leia com calma. Se o material não for para você, poderá solicitar o reembolso dentro de 15 dias.",
-    faqKicker: "06 / PERGUNTAS FREQUENTES",
-    faqTitle: "Tudo o que você precisa saber.",
-    faqs: [
-      ["O que o e-book contém?", "Mais de 300 entradas organizadas com objetivo, ingredientes, quantidades, preparo e aplicação em um PDF compacto."],
-      ["O acesso é imediato?", "Sim. Após a confirmação do pagamento, o acesso digital será disponibilizado conforme o processamento do checkout."],
-      ["Onde encontro os ingredientes?", "Muitos ingredientes podem ser encontrados em supermercados, lojas naturais, farmácias, feiras e casas especializadas."],
-      ["Posso ler no celular?", "Sim. O PDF é adequado para celular, tablet e computador."],
-    ],
-    finalTitle: "Tome hoje a decisão por uma vida mais consciente e conectada à natureza.",
-    finalCta: "Garantir meu exemplar agora",
-    footer: "Medicina da Natureza · Grupo de tratamentos naturais",
-    disclaimer: "Material informativo sobre conhecimento tradicional. Não substitui orientação individual de profissionais de saúde.",
-    language: "Idioma",
-  },
 } as const;
 
 function SectionLabel({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
@@ -157,7 +100,7 @@ function AppLink({ children, className = "" }: { children: React.ReactNode; clas
 }
 
 export default function Home() {
-  const [locale, setLocale] = useState<Locale>("de");
+  const locale: Locale = "de";
   const [openFaq, setOpenFaq] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
@@ -170,17 +113,6 @@ export default function Home() {
     { src: OPEN_BOOK_RECIPE, alt: "Aufgeschlagene Rezeptseite mit Ingwer-Zitronen-Tee" },
   ];
 
-  useEffect(() => {
-    // Alemão é o padrão em qualquer origem, inclusive links de bio e navegadores internos.
-    // Só muda para português quando o idioma preferido do dispositivo/navegador for pt.
-    const preferredLanguage = (navigator.languages?.[0] || navigator.language || "de").toLowerCase();
-    const detectedLocale: Locale = preferredLanguage.startsWith("pt") ? "pt" : "de";
-    setLocale(detectedLocale);
-    document.documentElement.lang = detectedLocale === "pt" ? "pt-BR" : "de";
-    document.title = detectedLocale === "pt"
-      ? "Medicina da Natureza — Mais de 300 soluções naturais"
-      : "Medizin der Natur — Über 300 natürliche Lösungen";
-  }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => {
@@ -220,21 +152,21 @@ export default function Home() {
               <p className="hero-lead">{t.heroText}</p>
               <div className="hero-actions">
                 <AppLink>{t.heroCta}</AppLink>
-                <a href="#buch" className="text-link">{locale === "de" ? "Mehr erfahren" : "Saiba mais"} <ArrowDown size={16} /></a>
+                <a href="#buch" className="text-link">Mehr erfahren <ArrowDown size={16} /></a>
               </div>
               <p className="hero-note"><ShieldCheck size={14} /> {t.heroNote}</p>
             </div>
             <div className="hero-product">
               <div className="halo" />
-              <div className="hero-carousel" aria-roledescription="carousel" aria-label={locale === "de" ? "Buch- und Inhaltsbilder" : "Imagens do livro e conteúdo"}>
+              <div className="hero-carousel" aria-roledescription="carousel" aria-label="Buch- und Inhaltsbilder">
                 <div className="hero-carousel-track" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
                   {carouselItems.map((item) => <div className="hero-carousel-slide" key={item.src}><img src={item.src} alt={item.alt} /></div>)}
                 </div>
                 <div className="hero-carousel-controls">
-                  {carouselItems.map((item, i) => <button key={item.src} className={carouselIndex === i ? "is-active" : ""} onClick={() => setCarouselIndex(i)} aria-label={`${locale === "de" ? "Bild" : "Imagem"} ${i + 1}`} />)}
+                  {carouselItems.map((item, i) => <button key={item.src} className={carouselIndex === i ? "is-active" : ""} onClick={() => setCarouselIndex(i)} aria-label={`Bild ${i + 1}`} />)}
                 </div>
               </div>
-              <div className="hero-stamp"><strong>300</strong><span>{locale === "de" ? "NATÜRLICHE LÖSUNGEN" : "SOLUÇÕES NATURAIS"}</span></div>
+              <div className="hero-stamp"><strong>300</strong><span>NATÜRLICHE LÖSUNGEN</span></div>
             </div>
           </div>
           <div className="hero-bottom-line"><span>GRUPPE FÜR NATÜRLICHE HEILMETHODEN</span><span>ÜBERLIEFERT · GEORDNET · PRAKTISCH</span></div>
@@ -246,7 +178,7 @@ export default function Home() {
             <h2>{t.problemTitle}</h2>
             <p>{t.problemText}</p>
           </div>
-          <div className="statement-visual"><img src={OPEN_BOOK_RECIPE} alt={locale === "de" ? "Aufgeschlagene Seite mit natürlicher Rezeptur" : "Livro aberto com receita natural"} /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div>
+          <div className="statement-visual"><img src={OPEN_BOOK_RECIPE} alt="Aufgeschlagene Seite mit natürlicher Rezeptur" /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div>
         </section>
 
         <section id="buch" className="book-section section-dark">
@@ -260,8 +192,8 @@ export default function Home() {
             <AppLink>{t.heroCta}</AppLink>
           </div>
           <div className="book-visual">
-            <div className="book-frame"><img src={COVER} alt="Capa atualizada do e-book Medizin der Natur" /></div>
-            <div className="book-caption"><BookOpen size={18} /><span>{locale === "de" ? "Ein Nachschlagewerk für Ihre natürliche Hausapotheke" : "Um guia de consulta para sua farmácia natural"}</span></div>
+            <div className="book-frame"><img src={COVER} alt="Aktuelles Cover des E-Books Medizin der Natur" /></div>
+            <div className="book-caption"><BookOpen size={18} /><span>Ein Nachschlagewerk für Ihre natürliche Hausapotheke</span></div>
           </div>
         </section>
 
@@ -291,8 +223,8 @@ export default function Home() {
 
         <section id="angebot" className="offer section-cream">
           <div className="offer-layout">
-            <div className="offer-copy"><SectionLabel>{t.offerKicker}</SectionLabel><h2>{t.offerTitle}</h2><img className="price-art" src={PRICE_ART} alt={locale === "de" ? "33 Euro und sofortiger digitaler Zugang im PDF-Format" : "33 euros e acesso digital imediato em PDF"} /><AppLink className="cta--gold">{t.buy}</AppLink></div>
-            <div className="guarantee-card"><img className="guarantee-seal-image" src={GUARANTEE_SEAL} alt={locale === "de" ? "Premium-Garantie-Siegel" : "Selo premium de garantia"} /><div><h3>{t.guarantee}</h3><p>{t.guaranteeText}</p></div></div>
+            <div className="offer-copy"><SectionLabel>{t.offerKicker}</SectionLabel><h2>{t.offerTitle}</h2><img className="price-art" src={PRICE_ART} alt="33 Euro und sofortiger digitaler Zugang im PDF-Format" /><AppLink className="cta--gold">{t.buy}</AppLink></div>
+            <div className="guarantee-card"><img className="guarantee-seal-image" src={GUARANTEE_SEAL} alt="Premium-Garantie-Siegel" /><div><h3>{t.guarantee}</h3><p>{t.guaranteeText}</p></div></div>
           </div>
         </section>
 
@@ -308,8 +240,8 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>{locale === "de" ? "Rechtliche Hinweise" : "Avisos legais"}</button><a href={`mailto:unterstutzung.service@gmail.com`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>
-      {legalOpen && <div className="legal-modal-backdrop" role="presentation" onClick={() => setLegalOpen(false)}><section className="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title" onClick={(event) => event.stopPropagation()}><button className="legal-close" onClick={() => setLegalOpen(false)} aria-label={locale === "de" ? "Schließen" : "Fechar"}>×</button><SectionLabel>{locale === "de" ? "RECHTLICHE HINWEISE" : "AVISOS LEGAIS"}</SectionLabel><h2 id="legal-title">{locale === "de" ? "Hinweise zum digitalen Material" : "Informações sobre o material digital"}</h2><p>{locale === "de" ? "Dieses E-Book dient der allgemeinen Information über traditionelles Pflanzenwissen. Die Inhalte ersetzen keine individuelle medizinische Beratung, Diagnose oder Behandlung." : "Este e-book tem finalidade informativa sobre conhecimentos tradicionais de plantas. O conteúdo não substitui orientação médica individual, diagnóstico ou tratamento."}</p><p>{locale === "de" ? "Bitte prüfen Sie Zutaten, Allergien und persönliche Verträglichkeit sorgfältig und wenden Sie sich bei gesundheitlichen Fragen an qualifiziertes Fachpersonal." : "Verifique ingredientes, alergias e sua tolerância individual. Em caso de dúvidas de saúde, procure um profissional qualificado."}</p></section></div>}
+      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>Rechtliche Hinweise</button><a href={`mailto:unterstutzung.service@gmail.com`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>
+      {legalOpen && <div className="legal-modal-backdrop" role="presentation" onClick={() => setLegalOpen(false)}><section className="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title" onClick={(event) => event.stopPropagation()}><button className="legal-close" onClick={() => setLegalOpen(false)} aria-label="Schließen">×</button><SectionLabel>RECHTLICHE HINWEISE</SectionLabel><h2 id="legal-title">Hinweise zum digitalen Material</h2><p>Dieses E-Book dient der allgemeinen Information über traditionelles Pflanzenwissen. Die Inhalte ersetzen keine individuelle medizinische Beratung, Diagnose oder Behandlung.</p><p>Bitte prüfen Sie Zutaten, Allergien und persönliche Verträglichkeit sorgfältig und wenden Sie sich bei gesundheitlichen Fragen an qualifiziertes Fachpersonal.</p></section></div>}
     </div>
   );
 }

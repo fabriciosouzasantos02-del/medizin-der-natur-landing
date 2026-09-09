@@ -35,11 +35,13 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body { margin: 0; min-width: 0; overflow-x: hidden; background: var(--cream); color: var(--ink); font-family: 'DM Sans', sans-serif; }
 button, a { font: inherit; }
 a { color: inherit; text-decoration: none; }
 button { border: 0; }
+img, svg { max-width: 100%; }
+h1, h2, h3, p, a, button, span { overflow-wrap: anywhere; }
 
 .site-shell { overflow: hidden; background: var(--cream); }
 .site-header { height: 74px; width: 100%; position: fixed; z-index: 50; top: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(18px, 5vw, 76px); background: rgba(9, 27, 17, .82); color: #f8f4ea; border-bottom: 1px solid rgba(223,196,134,.16); backdrop-filter: blur(16px); }
@@ -230,11 +232,15 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .method-cards { grid-template-columns: 1fr; }
   .method-card p { min-height: auto; }
   .offer-layout { grid-template-columns: 1fr; gap: 44px; }
+  .offer-copy { min-width: 0; }
+  .price-art { width: 100%; margin-top: 20px; }
   .guarantee-card { align-items: flex-start; padding: 21px; }
   .guarantee-seal-image { flex-basis: 110px; width: 110px; height: 100px; }
+  .guarantee-card > div { min-width: 0; }
   .faq { display: block; }
   .faq-list { margin-top: 40px; }
   .site-footer { flex-direction: column; text-align: center; }
   .site-footer p { order: 3; }
   .footer-links { flex-direction: column; gap: 10px; }
+  .footer-brand, .site-footer a { white-space: normal; justify-content: center; }
 }
