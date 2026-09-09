@@ -16,13 +16,13 @@ import {
 } from "lucide-react";
 
 const CHECKOUT = "https://pay.hotmart.com/O107466069Q?checkoutMode=10&bid=1788507646008";
-const COVER = "/manus-storage/updated-book-cover_b035aeb8.png";
-const HERO = "/manus-storage/medizin-hero_b17cb37c.jpg";
-const ORGANS = "/manus-storage/medizin-organs_08ea00be.jpg";
-const APPLICATIONS = "/manus-storage/medizin-applications_a07055c3.jpg";
-const CREATOR = "/manus-storage/creator-character_e4976805.jpg";
-const OPEN_BOOK = "/manus-storage/open-book_70a39726.png";
-const OPEN_BOOK_RECIPE = "/manus-storage/open-book-recipe_efe201d8.png";
+const COVER = "/assets/updated-book-cover.png";
+const HERO = "/assets/medizin-hero.jpg";
+const ORGANS = "/assets/medizin-organs.jpg";
+const APPLICATIONS = "/assets/medizin-applications.jpg";
+const CREATOR = "/assets/creator-character.jpg";
+const OPEN_BOOK = "/assets/open-book.png";
+const OPEN_BOOK_RECIPE = "/assets/open-book-recipe.png";
 
 type Locale = "de" | "pt";
 
