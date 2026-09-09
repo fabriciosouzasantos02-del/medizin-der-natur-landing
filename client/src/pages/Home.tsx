@@ -30,7 +30,7 @@ const copy = {
   de: {
     nav: { contents: "Inhalt", method: "Methode", offer: "Angebot", faq: "FAQ" },
     heroEyebrow: "DAS VERBORGENE WISSEN DER NATUR",
-    heroTitle: "Millionen werden für Ihre Krankheiten verkauft — doch die ultimative Heilung liegt direkt vor Ihrer Haustür.",
+    heroTitle: "Millionen werden für chemische Medikamente zur Behandlung Ihrer Beschwerden ausgegeben – doch die wirkliche Heilung war schon immer in der Natur zu finden.",
     heroText:
       "Entdecken Sie das geheime Arsenal von über 300 uralten Rezepten zur Behandlung, Heilung und Kontrolle von Krankheiten in jedem Organ Ihres Körpers. Der schrittweise Prozess, der Arterien befreit, Leberentzündungen bekämpft, chronische Schmerzen lindert und Ihre Gesundheit von innen heraus wiederherstellt.",
     heroCta: "Exemplar sichern",
