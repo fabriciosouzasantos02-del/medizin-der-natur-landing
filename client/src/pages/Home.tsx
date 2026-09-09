@@ -16,12 +16,14 @@ import {
 } from "lucide-react";
 
 const CHECKOUT = "https://pay.hotmart.com/O107466069Q?checkoutMode=10&bid=1788507646008";
-const COVER = "/manus-storage/ChatGPTImage3deset.de2026,05_09_27_56bcda9f.png";
+const COVER = "/manus-storage/updated-book-cover_b035aeb8.png";
 const HERO = "/manus-storage/medizin-hero_b17cb37c.jpg";
 const ORGANS = "/manus-storage/medizin-organs_08ea00be.jpg";
-const INGREDIENTS = "/manus-storage/medizin-ingredients_7361b628.jpg";
-const PREPARATION = "/manus-storage/medizin-preparation_aacd9d7f.jpg";
 const APPLICATIONS = "/manus-storage/medizin-applications_a07055c3.jpg";
+const CREATOR = "/manus-storage/creator-character_e4976805.jpg";
+const OPEN_BOOK = "/manus-storage/open-book_70a39726.png";
+const OPEN_BOOK_RECIPE = "/manus-storage/open-book-recipe_efe201d8.png";
+const CHEMICAL_REMEDIES = "/manus-storage/chemical-remedies_83a17d8c.jpg";
 
 type Locale = "de" | "pt";
 
@@ -29,52 +31,52 @@ const copy = {
   de: {
     nav: { contents: "Inhalt", method: "Methode", offer: "Angebot", faq: "FAQ" },
     heroEyebrow: "DAS VERBORGENE WISSEN DER NATUR",
-    heroTitle: "Über 300 traditionelle Rezepturen für ein bewussteres Leben.",
+    heroTitle: "Millionen werden für Ihre Krankheiten verkauft — doch die ultimative Heilung liegt direkt vor Ihrer Haustür.",
     heroText:
-      "Ein hochwertiger Praxisleitfaden mit überlieferten Tees, Garrafadas, Bädern, Salben und natürlichen Anwendungen — klar erklärt, Schritt für Schritt.",
+      "Entdecken Sie das geheime Arsenal von über 300 uralten Rezepten zur Behandlung, Heilung und Kontrolle von Krankheiten in jedem Organ Ihres Körpers. Der schrittweise Prozess, der Arterien befreit, Leberentzündungen bekämpft, chronische Schmerzen lindert und Ihre Gesundheit von innen heraus wiederherstellt.",
     heroCta: "Exemplar sichern",
     heroNote: "Sofortiger digitaler Zugang · PDF-Format",
     kicker: "01 / DER ANSATZ",
-    problemTitle: "Zurück zu dem, was die Natur bereits bereithält.",
+    problemTitle: "Die Pharmaindustrie entwickelt keine Heilmittel, sie schafft Kunden.",
     problemText:
-      "Zwischen Kräutern, Wurzeln, Blättern und einfachen Küchenzutaten liegt ein Erfahrungsschatz, der über Generationen weitergegeben wurde. Medizin der Natur macht dieses Wissen greifbar — mit präzisen Mengen, Zubereitungen und Anwendungsideen.",
-    pull: "Traditionelles Wissen. Praktisch geordnet. Für den Alltag.",
+      "Wenn Sie heute an einer Krankheit leiden, beantworten Sie diese Frage ehrlich: Hat das Medikament, das Sie einnehmen, Ihr Problem gelöst, oder müssen Sie es Ihr Leben lang nehmen? Die moderne Medizin ist in Notfällen hervorragend, aber bei chronischen Krankheiten werden häufig nur Symptome unterdrückt. Ihre Vorfahren wussten, wie man mit natürlichen Heilmitteln achtsam mit dem Körper umgeht.",
+    pull: "Schluss mit schwarzen Pillen und ihren verheerenden Nebenwirkungen!",
     productKicker: "02 / DAS BUCH",
-    productTitle: "Die praktische Enzyklopädie der Gesundheit unserer Ahnen.",
+    productTitle: "Die praktischen Gesundheitsrichtlinien unserer Vorfahren: natürliche Behandlungen und Heilmittel.",
     productText:
-      "Kein loses Sammelsurium. Jede Lösung folgt demselben klaren Aufbau: Zweck, Zutaten, Zubereitung, Anwendung und Hinweise — damit Sie schnell finden, was Sie suchen.",
+      "Wir haben über 300 traditionelle Heilrezepte zusammengestellt, die auf überliefertem Wissen basieren. Eine präzise Schritt-für-Schritt-Anleitung mit genauen Zutaten, Extraktionsmethoden und praktischen Anwendungshinweisen.",
     productPoints: ["300 nummerierte Lösungen", "Tees, Garrafadas, Bäder, Salben und Kompressen", "Kompakte Schritt-für-Schritt-Anleitungen", "Digitales PDF zum sofortigen Lesen"],
     learnKicker: "03 / WAS SIE ENTDECKEN",
     learnTitle: "Ein klarer Weg durch die natürliche Hausapotheke.",
     learnText: "Die Inhalte sind nach Körperbereichen und Alltagssituationen geordnet — vom ersten Blick bis zur praktischen Anwendung.",
     categories: [
-      ["Leber, Nieren & Galle", "Überlieferte Kräuter- und Lebensmittelanwendungen für die tägliche Pflanzenkunde."],
-      ["Herz & Kreislauf", "Traditionelle Rezepturen und achtsame Routinen für Ihr Wohlbefinden."],
-      ["Schmerzen & Entzündungen", "Warme Kompressen, Bäder, Öle und äußerliche Anwendungen."],
-      ["Magen & Verdauung", "Tees, leichte Zubereitungen und Küchenmittel für den Alltag."],
-      ["Nerven & Immunsystem", "Ruhige Abendrituale, Kräuterwissen und natürliche Begleiter."],
+      ["Leber, Nieren und Gallenblase", "Intensive traditionelle Pflanzenkuren und natürliche Ressourcen für die tägliche Pflanzenkunde."],
+      ["Herz und Kreislaufsystem", "Überlieferte Rezepturen und achtsame Routinen rund um Kreislauf und Wohlbefinden."],
+      ["Chronische Schmerzen und Entzündungen", "Traditionelle Anwendungen mit Kompressen, Bädern, Ölen und Salben."],
+      ["Chronische Erkrankungen und Beschwerden", "Unterstützende und vorbeugende Anwendungen als Ergänzung zur fachlichen Behandlung."],
+      ["Nervensystem und Immunsystem", "Rezepte zur Linderung von Unruhe, Schlafproblemen und zur Stärkung der natürlichen Widerstandskraft."],
     ],
     methodKicker: "04 / SO FUNKTIONIERT ES",
-    methodTitle: "Vom Rohstoff zur fertigen Anwendung — ohne Umwege.",
-    methodText: "Jede Rezeptur wird so aufbereitet, dass Sie die einzelnen Schritte intuitiv nachvollziehen können.",
+    methodTitle: "Wie funktionieren die Schritt-für-Schritt-Anleitungen?",
+    methodText: "Keine Sorge, Sie benötigen keine medizinischen Vorkenntnisse. Die Anleitung ist intuitiv und leicht verständlich.",
     methodCards: [
-      ["Genaue Zutaten", "Wurzeln, Blätter, Rinden, Samen und Küchenzutaten — mit Mengen und Alternativen."],
-      ["Detaillierte Zubereitung", "Kochzeit, Ziehzeit, Gefäße und Reihenfolge verständlich erklärt."],
-      ["Praktische Anwendung", "Aufgüsse, Bäder, Kompressen, Salben und Sirupe mit klarer Anwendungsidee."],
+      ["Genaue Zutaten", "Wurzeln, Blätter, Rinde und Samen, die Sie in Naturkostläden oder auf Wochenmärkten finden."],
+      ["Detaillierte Zubereitung", "Präzise Kochzeit, richtige Mengenverhältnisse und ein geeignetes Gefäß — verständlich erklärt."],
+      ["Praktische Anwendungstechniken", "Konzentrierte Aufgüsse, Tinkturen, dermatologische Salben, warme Kompressen und Sirupe."],
     ],
     offerKicker: "05 / IHR EXEMPLAR",
-    offerTitle: "Ein ganzer Wissensschatz. Zum Preis einer kleinen Alltagspause.",
+    offerTitle: "Gesundheit zurückgewinnen zum Preis einer Packung Generika.",
     pricePrefix: "Nur",
     access: "Sofortiger digitaler Zugang im PDF-Format",
     buy: "Jetzt Exemplar sichern",
-    guarantee: "15 Tage Zufriedenheitsgarantie",
-    guaranteeText: "Lesen Sie in Ruhe. Wenn das Material nicht zu Ihnen passt, können Sie innerhalb von 15 Tagen eine Rückerstattung anfragen.",
+    guarantee: "Zufriedenheitsgarantie — volle Kostenübernahme",
+    guaranteeText: "15 Tage risikofrei testen. Kaufen Sie das Buch, entdecken Sie über 300 Rezepte und prüfen Sie in Ruhe, ob das Material zu Ihnen passt. Innerhalb von 15 Tagen können Sie eine Rückerstattung anfragen.",
     faqKicker: "06 / HÄUFIGE FRAGEN",
     faqTitle: "Alles Wichtige auf einen Blick.",
     faqs: [
-      ["Was enthält das E-Book?", "Über 300 strukturierte Einträge mit Zweck, Zutaten, Mengen, Zubereitung und Anwendung — in einem kompakten PDF."],
-      ["Ist der Zugang sofort verfügbar?", "Ja. Nach bestätigter Zahlung wird der digitale Zugang gemäß der Abwicklung des Checkout-Anbieters bereitgestellt."],
-      ["Wo finde ich die Zutaten?", "Viele Zutaten finden Sie in Supermärkten, Reformhäusern, Apotheken, Wochenmärkten und spezialisierten Naturkostläden."],
+      ["Lehrt das Buch, wie man schwere Erkrankungen behandelt?", "Das Buch vermittelt traditionelles Wissen zur Unterstützung, Vorbeugung und Linderung verschiedener Beschwerden und chronischer Schmerzen und dient als Ergänzung zur ärztlichen Behandlung."],
+      ["Wo finde ich die Heilpflanzen?", "Viele natürliche Ressourcen finden Sie auf Märkten, Wochenmärkten sowie in Geschäften und Online-Shops für Naturprodukte."],
+      ["Wie erhalte ich Zugriff?", "Das Material ist ein hochwertiges E-Book im PDF-Format. Die Lieferung erfolgt automatisch und umgehend per E-Mail, sobald die Zahlung bestätigt wurde."],
       ["Kann ich auf dem Smartphone lesen?", "Ja. Das PDF ist für Smartphone, Tablet und Computer geeignet."],
     ],
     finalTitle: "Treffen Sie heute die Entscheidung für ein bewussteres, natürlicheres Leben.",
@@ -164,9 +166,9 @@ export default function Home() {
 
   const carouselItems = [
     { src: COVER, alt: "Medizin der Natur — Buchcover" },
-    { src: INGREDIENTS, alt: "Natürliche Zutaten und Heilpflanzen" },
-    { src: PREPARATION, alt: "Zubereitung einer natürlichen Rezeptur" },
-    { src: APPLICATIONS, alt: "Natürliche Anwendungen und Hausmittel" },
+    { src: CREATOR, alt: "Der Autor mit dem Buch in der Natur" },
+    { src: OPEN_BOOK, alt: "Aufgeschlagenes Buch mit natürlicher Rezeptur" },
+    { src: OPEN_BOOK_RECIPE, alt: "Aufgeschlagene Rezeptseite mit Ingwer-Zitronen-Tee" },
   ];
 
   useEffect(() => {
@@ -242,7 +244,7 @@ export default function Home() {
             <h2>{t.problemTitle}</h2>
             <p>{t.problemText}</p>
           </div>
-          <div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div>
+          <div className="statement-visual"><img src={CHEMICAL_REMEDIES} alt={locale === "de" ? "Tabletten und medizinische Verpackungen" : "Comprimidos e embalagens médicas"} /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div>
         </section>
 
         <section id="buch" className="book-section section-dark">
@@ -256,8 +258,9 @@ export default function Home() {
             <AppLink>{t.heroCta}</AppLink>
           </div>
           <div className="book-visual">
-            <div className="book-frame"><img src={COVER} alt="Capa do e-book Medicina der Natur" /></div>
+            <div className="book-frame"><img src={COVER} alt="Capa atualizada do e-book Medizin der Natur" /></div>
             <div className="book-caption"><BookOpen size={18} /><span>{locale === "de" ? "Ein Nachschlagewerk für Ihre natürliche Hausapotheke" : "Um guia de consulta para sua farmácia natural"}</span></div>
+            <div className="creator-card"><img src={CREATOR} alt={locale === "de" ? "Der Schöpfer des Buches" : "Criador do livro"} /><div><small>{locale === "de" ? "HINTER DEM WISSEN" : "POR TRÁS DO CONHECIMENTO"}</small><strong>{locale === "de" ? "Der Schöpfer des Buches" : "O criador do livro"}</strong></div></div>
           </div>
         </section>
 
@@ -274,8 +277,8 @@ export default function Home() {
           <div className="method-intro"><SectionLabel light>{t.methodKicker}</SectionLabel><h2>{t.methodTitle}</h2><p>{t.methodText}</p></div>
           <div className="method-cards">
             {[
-              [INGREDIENTS, Wheat, t.methodCards[0]],
-              [PREPARATION, FlaskConical, t.methodCards[1]],
+              [OPEN_BOOK, Wheat, t.methodCards[0]],
+              [OPEN_BOOK_RECIPE, FlaskConical, t.methodCards[1]],
               [APPLICATIONS, Leaf, t.methodCards[2]],
             ].map(([image, Icon, card]) => {
               const [title, text] = card as readonly [string, string];
