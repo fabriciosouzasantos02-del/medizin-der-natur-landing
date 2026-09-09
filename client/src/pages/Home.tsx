@@ -236,7 +236,6 @@ export default function Home() {
         <section className="statement section-cream">
           <div className="statement-number">01</div>
           <div className="statement-content">
-            <SectionLabel>{t.kicker}</SectionLabel>
             <h2>{t.problemTitle}</h2>
             <p>{t.problemText}</p>
           </div>
