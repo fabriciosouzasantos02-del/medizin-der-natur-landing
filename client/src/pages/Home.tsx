@@ -171,8 +171,15 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    const lang = navigator.languages?.[0] || navigator.language || "de";
-    setLocale(lang.toLowerCase().startsWith("pt") ? "pt" : "de");
+    // Alemão é o padrão em qualquer origem, inclusive links de bio e navegadores internos.
+    // Só muda para português quando o idioma preferido do dispositivo/navegador for pt.
+    const preferredLanguage = (navigator.languages?.[0] || navigator.language || "de").toLowerCase();
+    const detectedLocale: Locale = preferredLanguage.startsWith("pt") ? "pt" : "de";
+    setLocale(detectedLocale);
+    document.documentElement.lang = detectedLocale === "pt" ? "pt-BR" : "de";
+    document.title = detectedLocale === "pt"
+      ? "Medicina da Natureza — Mais de 300 soluções naturais"
+      : "Medizin der Natur — Über 300 natürliche Lösungen";
   }, []);
 
   useEffect(() => {
