@@ -6,7 +6,6 @@ import {
   Check,
   ChevronDown,
   FlaskConical,
-  Globe2,
   Leaf,
   Mail,
   ShieldCheck,
@@ -200,9 +199,6 @@ export default function Home() {
           <a href="#faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
         </nav>
         <div className="header-actions">
-          <button className="language-toggle" onClick={() => setLocale(locale === "de" ? "pt" : "de")} aria-label={`${t.language}: ${locale}`}>
-            <Globe2 size={15} /> {locale.toUpperCase()}
-          </button>
           <AppLink className="cta--small">{t.heroCta}</AppLink>
           <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu"><span /><span /></button>
         </div>
