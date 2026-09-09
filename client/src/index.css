@@ -139,18 +139,10 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
 .offer-layout { max-width: 1090px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr); align-items: center; gap: clamp(38px, 6vw, 70px); }
 .offer-copy { min-width: 0; }
 .offer-copy h2 { max-width: 570px; margin-bottom: 24px; }
-.price-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 13px; margin: 26px 0 10px; color: #9a712f; font: 500 20px/1 'Cormorant Garamond', serif; }
-.price-line strong { display: inline-block; color: var(--forest); font: 700 clamp(68px, 8vw, 102px)/.8 'Cormorant Garamond', serif; letter-spacing: -.03em; }
-.price-line strong span { font-size: .45em; vertical-align: super; }
-.offer-access { display: flex; align-items: center; gap: 8px; color: #697066; font-size: 12px; }
+.price-art { display: block; width: min(100%, 540px); height: auto; margin: 26px 0 22px; border: 1px solid rgba(111,83,39,.18); box-shadow: 0 15px 30px rgba(33,53,37,.14); }
 .offer-copy .cta { margin-top: 17px; }
 .guarantee-card { display: flex; align-items: center; gap: 22px; min-width: 0; padding: 25px; background: linear-gradient(145deg, #183d28, #0a2115); color: var(--paper); border: 1px solid rgba(223,196,134,.68); box-shadow: 0 18px 0 rgba(200,157,74,.18), 0 22px 42px rgba(8,22,13,.18); }
-.guarantee-seal { position: relative; display: grid; place-items: center; flex: 0 0 132px; width: 132px; height: 132px; color: var(--gold-soft); border: 1px solid var(--gold-soft); border-radius: 50%; outline: 1px solid rgba(223,196,134,.5); outline-offset: -8px; text-align: center; }
-.guarantee-seal::before, .guarantee-seal::after { content: '✦'; position: absolute; color: var(--gold-soft); font-size: 12px; }
-.guarantee-seal::before { top: 14px; }
-.guarantee-seal::after { bottom: 14px; }
-.guarantee-seal strong { display: block; font: 700 44px/.78 'Cormorant Garamond', serif; }
-.guarantee-seal span { display: block; margin-top: 4px; font-size: 8px; font-weight: 700; letter-spacing: .2em; }
+.guarantee-seal-image { display: block; flex: 0 0 164px; width: 164px; height: 126px; object-fit: contain; }
 .guarantee-card h3 { margin: 0 0 9px; color: var(--gold-soft); font: 700 clamp(20px, 2.4vw, 28px)/1.05 'Cormorant Garamond', serif; }
 .guarantee-card p { margin: 0; color: rgba(248,244,234,.7); font-size: 12px; line-height: 1.65; }
 
@@ -239,9 +231,7 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .method-card p { min-height: auto; }
   .offer-layout { grid-template-columns: 1fr; gap: 44px; }
   .guarantee-card { align-items: flex-start; padding: 21px; }
-  .guarantee-seal { flex-basis: 92px; width: 92px; height: 92px; }
-  .guarantee-seal strong { font-size: 31px; }
-  .guarantee-seal span { font-size: 7px; }
+  .guarantee-seal-image { flex-basis: 110px; width: 110px; height: 100px; }
   .faq { display: block; }
   .faq-list { margin-top: 40px; }
   .site-footer { flex-direction: column; text-align: center; }

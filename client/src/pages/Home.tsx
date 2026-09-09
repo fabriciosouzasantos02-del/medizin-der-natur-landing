@@ -5,7 +5,6 @@ import {
   BookOpen,
   Check,
   ChevronDown,
-  Clock3,
   FlaskConical,
   Globe2,
   Leaf,
@@ -23,6 +22,8 @@ const APPLICATIONS = "/assets/medizin-applications.jpg";
 const CREATOR = "/assets/creator-character.jpg";
 const OPEN_BOOK = "/assets/open-book.png";
 const OPEN_BOOK_RECIPE = "/assets/open-book-recipe.png";
+const PRICE_ART = "/assets/premium-book-price.jpeg";
+const GUARANTEE_SEAL = "/assets/premium-guarantee-seal.png";
 
 type Locale = "de" | "pt";
 
@@ -288,8 +289,8 @@ export default function Home() {
 
         <section id="angebot" className="offer section-cream">
           <div className="offer-layout">
-            <div className="offer-copy"><SectionLabel>{t.offerKicker}</SectionLabel><h2>{t.offerTitle}</h2><div className="price-line"><span>{t.pricePrefix}</span><strong>33<span>€</span></strong></div><p className="offer-access"><Clock3 size={16} /> {t.access}</p><AppLink className="cta--gold">{t.buy}</AppLink></div>
-            <div className="guarantee-card"><div className="guarantee-seal"><ShieldCheck size={28} /><strong>15</strong><span>{locale === "de" ? "TAGE" : "DIAS"}</span></div><div><h3>{t.guarantee}</h3><p>{t.guaranteeText}</p></div></div>
+            <div className="offer-copy"><SectionLabel>{t.offerKicker}</SectionLabel><h2>{t.offerTitle}</h2><img className="price-art" src={PRICE_ART} alt={locale === "de" ? "33 Euro und sofortiger digitaler Zugang im PDF-Format" : "33 euros e acesso digital imediato em PDF"} /><AppLink className="cta--gold">{t.buy}</AppLink></div>
+            <div className="guarantee-card"><img className="guarantee-seal-image" src={GUARANTEE_SEAL} alt={locale === "de" ? "Premium-Garantie-Siegel" : "Selo premium de garantia"} /><div><h3>{t.guarantee}</h3><p>{t.guaranteeText}</p></div></div>
           </div>
         </section>
 
@@ -305,7 +306,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>{locale === "de" ? "Rechtliche Hinweise" : "Avisos legais"}</button><a href={`mailto:kontakt@medizin-der-natur.de`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>
+      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>{locale === "de" ? "Rechtliche Hinweise" : "Avisos legais"}</button><a href={`mailto:unterstutzung.service@gmail.com`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>
       {legalOpen && <div className="legal-modal-backdrop" role="presentation" onClick={() => setLegalOpen(false)}><section className="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title" onClick={(event) => event.stopPropagation()}><button className="legal-close" onClick={() => setLegalOpen(false)} aria-label={locale === "de" ? "Schließen" : "Fechar"}>×</button><SectionLabel>{locale === "de" ? "RECHTLICHE HINWEISE" : "AVISOS LEGAIS"}</SectionLabel><h2 id="legal-title">{locale === "de" ? "Hinweise zum digitalen Material" : "Informações sobre o material digital"}</h2><p>{locale === "de" ? "Dieses E-Book dient der allgemeinen Information über traditionelles Pflanzenwissen. Die Inhalte ersetzen keine individuelle medizinische Beratung, Diagnose oder Behandlung." : "Este e-book tem finalidade informativa sobre conhecimentos tradicionais de plantas. O conteúdo não substitui orientação médica individual, diagnóstico ou tratamento."}</p><p>{locale === "de" ? "Bitte prüfen Sie Zutaten, Allergien und persönliche Verträglichkeit sorgfältig und wenden Sie sich bei gesundheitlichen Fragen an qualifiziertes Fachpersonal." : "Verifique ingredientes, alergias e sua tolerância individual. Em caso de dúvidas de saúde, procure um profissional qualificado."}</p></section></div>}
     </div>
   );
