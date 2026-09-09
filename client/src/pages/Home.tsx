@@ -23,7 +23,6 @@ const APPLICATIONS = "/manus-storage/medizin-applications_a07055c3.jpg";
 const CREATOR = "/manus-storage/creator-character_e4976805.jpg";
 const OPEN_BOOK = "/manus-storage/open-book_70a39726.png";
 const OPEN_BOOK_RECIPE = "/manus-storage/open-book-recipe_efe201d8.png";
-const CHEMICAL_REMEDIES = "/manus-storage/chemical-remedies_83a17d8c.jpg";
 
 type Locale = "de" | "pt";
 
@@ -244,7 +243,7 @@ export default function Home() {
             <h2>{t.problemTitle}</h2>
             <p>{t.problemText}</p>
           </div>
-          <div className="statement-visual"><img src={CHEMICAL_REMEDIES} alt={locale === "de" ? "Tabletten und medizinische Verpackungen" : "Comprimidos e embalagens médicas"} /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div>
+          <div className="statement-visual"><img src={OPEN_BOOK_RECIPE} alt={locale === "de" ? "Aufgeschlagene Seite mit natürlicher Rezeptur" : "Livro aberto com receita natural"} /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div>
         </section>
 
         <section id="buch" className="book-section section-dark">
@@ -260,7 +259,6 @@ export default function Home() {
           <div className="book-visual">
             <div className="book-frame"><img src={COVER} alt="Capa atualizada do e-book Medizin der Natur" /></div>
             <div className="book-caption"><BookOpen size={18} /><span>{locale === "de" ? "Ein Nachschlagewerk für Ihre natürliche Hausapotheke" : "Um guia de consulta para sua farmácia natural"}</span></div>
-            <div className="creator-card"><img src={CREATOR} alt={locale === "de" ? "Der Schöpfer des Buches" : "Criador do livro"} /><div><small>{locale === "de" ? "HINTER DEM WISSEN" : "POR TRÁS DO CONHECIMENTO"}</small><strong>{locale === "de" ? "Der Schöpfer des Buches" : "O criador do livro"}</strong></div></div>
           </div>
         </section>
 

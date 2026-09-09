@@ -90,7 +90,7 @@ button { border: 0; }
 .statement-number { color: var(--forest-2); font: 600 92px/.7 'Cormorant Garamond', serif; opacity: .2; }
 .statement-content { max-width: 690px; }
 .statement-visual { display: flex; flex-direction: column; gap: 16px; align-self: end; }
-.statement-visual > img { width: 100%; height: 126px; object-fit: cover; filter: saturate(.78) contrast(1.04); box-shadow: 0 12px 25px rgba(34,53,37,.12); }
+.statement-visual > img { width: 100%; height: 126px; object-fit: cover; filter: saturate(.88) contrast(1.02); box-shadow: 0 12px 25px rgba(34,53,37,.12); }
 h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Garamond', serif; letter-spacing: -.025em; color: var(--forest); text-wrap: balance; }
 .statement-content p, .discover-head p, .method-intro p, .book-copy > p { color: #5f665d; font-size: 16px; line-height: 1.75; }
 .statement-pull { display: flex; gap: 13px; align-items: center; align-self: end; padding: 17px; color: var(--forest); border-left: 2px solid var(--gold); font: 600 21px/1.08 'Cormorant Garamond', serif; }
@@ -108,11 +108,6 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
 .book-frame::before { content: ''; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.4); pointer-events: none; }
 .book-frame img { display: block; width: 100%; }
 .book-caption { display: flex; align-items: center; justify-content: center; gap: 10px; max-width: 380px; margin: 25px auto 0; color: var(--gold-soft); font: 600 18px/1.1 'Cormorant Garamond', serif; text-align: center; }
-.creator-card { display: flex; align-items: center; gap: 12px; width: min(100%, 390px); margin: 24px auto 0; padding: 9px; color: var(--paper); background: rgba(248,244,234,.08); border: 1px solid rgba(223,196,134,.28); }
-.creator-card img { width: 62px; height: 62px; object-fit: cover; object-position: center; }
-.creator-card div { display: grid; gap: 5px; }
-.creator-card small { color: var(--gold-soft); font-size: 8px; font-weight: 700; letter-spacing: .18em; }
-.creator-card strong { font: 600 18px/1 'Cormorant Garamond', serif; }
 
 .discover { padding: 105px clamp(22px, 7vw, 120px); }
 .discover-head { max-width: 1240px; margin: 0 auto 38px; display: flex; align-items: end; justify-content: space-between; gap: 60px; }
@@ -141,18 +136,22 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
 .method-card p { min-height: 57px; margin: 0; color: #656b61; font-size: 13px; line-height: 1.6; }
 
 .offer { padding: 96px clamp(22px, 7vw, 120px); border-bottom: 1px solid var(--line); }
-.offer-layout { max-width: 1090px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 70px; }
-.offer-copy h2 { max-width: 570px; }
-.price-line { display: flex; align-items: baseline; gap: 13px; margin: 26px 0 5px; color: #9a712f; font: 500 20px 'Cormorant Garamond', serif; }
-.price-line strong { color: var(--forest); font: 700 clamp(70px, 8vw, 102px)/.8 'Cormorant Garamond', serif; }
+.offer-layout { max-width: 1090px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr); align-items: center; gap: clamp(38px, 6vw, 70px); }
+.offer-copy { min-width: 0; }
+.offer-copy h2 { max-width: 570px; margin-bottom: 24px; }
+.price-line { display: flex; align-items: baseline; flex-wrap: wrap; gap: 13px; margin: 26px 0 10px; color: #9a712f; font: 500 20px/1 'Cormorant Garamond', serif; }
+.price-line strong { display: inline-block; color: var(--forest); font: 700 clamp(68px, 8vw, 102px)/.8 'Cormorant Garamond', serif; letter-spacing: -.03em; }
 .price-line strong span { font-size: .45em; vertical-align: super; }
 .offer-access { display: flex; align-items: center; gap: 8px; color: #697066; font-size: 12px; }
 .offer-copy .cta { margin-top: 17px; }
-.guarantee-card { display: flex; align-items: center; gap: 23px; padding: 28px; background: var(--forest); color: var(--paper); border: 1px solid rgba(200,157,74,.55); box-shadow: 13px 16px 0 rgba(200,157,74,.25); }
-.guarantee-seal { display: grid; place-items: center; flex: 0 0 120px; width: 120px; height: 120px; color: var(--gold-soft); border: 1px solid var(--gold); border-radius: 50%; text-align: center; }
-.guarantee-seal strong { font: 700 43px/.7 'Cormorant Garamond', serif; }
-.guarantee-seal span { font-size: 9px; letter-spacing: .18em; }
-.guarantee-card h3 { margin: 0 0 9px; color: var(--gold-soft); font: 700 25px/1 'Cormorant Garamond', serif; }
+.guarantee-card { display: flex; align-items: center; gap: 22px; min-width: 0; padding: 25px; background: linear-gradient(145deg, #183d28, #0a2115); color: var(--paper); border: 1px solid rgba(223,196,134,.68); box-shadow: 0 18px 0 rgba(200,157,74,.18), 0 22px 42px rgba(8,22,13,.18); }
+.guarantee-seal { position: relative; display: grid; place-items: center; flex: 0 0 132px; width: 132px; height: 132px; color: var(--gold-soft); border: 1px solid var(--gold-soft); border-radius: 50%; outline: 1px solid rgba(223,196,134,.5); outline-offset: -8px; text-align: center; }
+.guarantee-seal::before, .guarantee-seal::after { content: '✦'; position: absolute; color: var(--gold-soft); font-size: 12px; }
+.guarantee-seal::before { top: 14px; }
+.guarantee-seal::after { bottom: 14px; }
+.guarantee-seal strong { display: block; font: 700 44px/.78 'Cormorant Garamond', serif; }
+.guarantee-seal span { display: block; margin-top: 4px; font-size: 8px; font-weight: 700; letter-spacing: .2em; }
+.guarantee-card h3 { margin: 0 0 9px; color: var(--gold-soft); font: 700 clamp(20px, 2.4vw, 28px)/1.05 'Cormorant Garamond', serif; }
 .guarantee-card p { margin: 0; color: rgba(248,244,234,.7); font-size: 12px; line-height: 1.65; }
 
 .faq { max-width: 1090px; margin: 0 auto; padding: 95px clamp(22px, 7vw, 120px) 110px; display: grid; grid-template-columns: .75fr 1.25fr; gap: 80px; }
@@ -240,7 +239,7 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .method-card p { min-height: auto; }
   .offer-layout { grid-template-columns: 1fr; gap: 44px; }
   .guarantee-card { align-items: flex-start; padding: 21px; }
-  .guarantee-seal { flex-basis: 85px; width: 85px; height: 85px; }
+  .guarantee-seal { flex-basis: 92px; width: 92px; height: 92px; }
   .guarantee-seal strong { font-size: 31px; }
   .guarantee-seal span { font-size: 7px; }
   .faq { display: block; }
