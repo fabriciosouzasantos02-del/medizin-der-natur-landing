@@ -74,10 +74,10 @@ h1, h2, h3, p, a, button, span { overflow-wrap: anywhere; }
 .text-link { display: inline-flex; align-items: center; gap: 8px; color: var(--gold-soft); font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; }
 .hero-note { display: flex; align-items: center; gap: 8px; margin-top: 24px; color: rgba(248,244,234,.55); font-size: 11px; }
 .hero-product { position: relative; justify-self: end; width: min(100%, 420px); }
-.hero-carousel { position: relative; z-index: 1; width: 84%; margin-left: auto; overflow: hidden; filter: drop-shadow(0 30px 28px rgba(0,0,0,.48)); transform: rotate(2deg); }
+.hero-carousel { position: relative; z-index: 1; width: 100%; margin-left: auto; overflow: hidden; filter: drop-shadow(0 30px 28px rgba(0,0,0,.48)); transform: rotate(1deg); border: 1px solid rgba(223,196,134,.35); }
 .hero-carousel-track { display: flex; transition: transform .55s cubic-bezier(.23,1,.32,1); }
 .hero-carousel-slide { flex: 0 0 100%; min-width: 100%; }
-.hero-carousel-slide img { display: block; width: 100%; aspect-ratio: 2 / 3; object-fit: cover; }
+.hero-carousel-slide img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .hero-carousel-controls { position: absolute; z-index: 2; left: 50%; bottom: 13px; display: flex; gap: 6px; transform: translateX(-50%) rotate(-2deg); }
 .hero-carousel-controls button { width: 7px; height: 7px; padding: 0; border: 1px solid rgba(248,244,234,.85); border-radius: 50%; background: transparent; cursor: pointer; transition: transform .18s ease, background .18s ease; }
 .hero-carousel-controls button.is-active { background: var(--gold-soft); transform: scale(1.45); }
@@ -106,6 +106,8 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
 .check-list li { display: flex; align-items: center; gap: 11px; }
 .check-list li span { display: grid; place-items: center; flex: 0 0 24px; width: 24px; height: 24px; color: var(--forest); background: var(--gold); border-radius: 50%; }
 .book-visual { align-self: center; }
+.book-visual--nature { width: min(100%, 510px); margin: 0 auto; }
+.book-visual--nature > img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 1px solid rgba(223,196,134,.45); box-shadow: 0 22px 50px rgba(0,0,0,.35); }
 .book-frame { position: relative; width: min(100%, 390px); margin: 0 auto; padding: 13px; background: linear-gradient(135deg, var(--gold), #7e5b29, var(--gold-soft)); box-shadow: 0 22px 50px rgba(0,0,0,.35); transform: rotate(2deg); }
 .book-frame::before { content: ''; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.4); pointer-events: none; }
 .book-frame img { display: block; width: 100%; }
@@ -141,10 +143,14 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
 .offer-layout { max-width: 1090px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, .9fr); align-items: center; gap: clamp(38px, 6vw, 70px); }
 .offer-copy { min-width: 0; }
 .offer-copy h2 { max-width: 570px; margin-bottom: 24px; }
-.price-art { display: block; width: min(100%, 540px); height: auto; margin: 26px 0 22px; border: 1px solid rgba(111,83,39,.18); box-shadow: 0 15px 30px rgba(33,53,37,.14); }
+.price-panel { display: flex; flex-direction: column; width: min(100%, 540px); margin: 26px 0 22px; padding: 25px 28px; color: var(--paper); background: linear-gradient(135deg, var(--forest-2), var(--forest)); border-left: 4px solid var(--gold); box-shadow: 0 15px 30px rgba(33,53,37,.14); }
+.price-panel .price-label { color: var(--gold-soft); font-size: 10px; font-weight: 700; letter-spacing: .15em; }
+.price-panel strong { margin: 4px 0 2px; color: var(--gold-soft); font: 600 70px/.9 'Cormorant Garamond', serif; }
+.price-panel > span:last-child { color: rgba(248,244,234,.72); font-size: 13px; }
 .offer-copy .cta { margin-top: 17px; }
 .guarantee-card { display: flex; align-items: center; gap: 22px; min-width: 0; padding: 25px; background: linear-gradient(145deg, #183d28, #0a2115); color: var(--paper); border: 1px solid rgba(223,196,134,.68); box-shadow: 0 18px 0 rgba(200,157,74,.18), 0 22px 42px rgba(8,22,13,.18); }
-.guarantee-seal-image { display: block; flex: 0 0 164px; width: 164px; height: 126px; object-fit: contain; }
+.guarantee-seal { display: grid; place-items: center; flex: 0 0 104px; width: 104px; height: 104px; color: var(--gold-soft); border: 1px solid var(--gold); border-radius: 50%; font: 600 31px/.72 'Cormorant Garamond', serif; text-align: center; }
+.guarantee-seal small { font: 700 9px/1 'DM Sans', sans-serif; letter-spacing: .14em; }
 .guarantee-card h3 { margin: 0 0 9px; color: var(--gold-soft); font: 700 clamp(20px, 2.4vw, 28px)/1.05 'Cormorant Garamond', serif; }
 .guarantee-card p { margin: 0; color: rgba(248,244,234,.7); font-size: 12px; line-height: 1.65; }
 
@@ -204,7 +210,7 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .hero-inner { display: flex; flex-direction: column; align-items: stretch; gap: 32px; }
   .hero h1 { font-size: clamp(44px, 14vw, 65px); }
   .hero-product { width: min(75vw, 310px); margin: 0 auto; }
-  .hero-carousel { width: 87%; }
+  .hero-carousel { width: 100%; }
   .hero-stamp { width: 82px; height: 82px; padding: 10px; left: 0; bottom: 7%; }
   .hero-stamp strong { font-size: 30px; }
   .hero-stamp span { font-size: 6px; }
@@ -233,9 +239,9 @@ h2 { margin: 15px 0 17px; font: 600 clamp(35px, 4.3vw, 61px)/.96 'Cormorant Gara
   .method-card p { min-height: auto; }
   .offer-layout { grid-template-columns: 1fr; gap: 44px; }
   .offer-copy { min-width: 0; }
-  .price-art { width: 100%; margin-top: 20px; }
+  .price-panel { width: 100%; margin-top: 20px; }
   .guarantee-card { align-items: flex-start; padding: 21px; }
-  .guarantee-seal-image { flex-basis: 110px; width: 110px; height: 100px; }
+  .guarantee-seal { flex-basis: 86px; width: 86px; height: 86px; font-size: 25px; }
   .guarantee-card > div { min-width: 0; }
   .faq { display: block; }
   .faq-list { margin-top: 40px; }

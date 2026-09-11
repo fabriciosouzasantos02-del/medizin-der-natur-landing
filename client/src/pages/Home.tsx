@@ -1,247 +1,59 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  BookOpen,
-  Check,
-  ChevronDown,
-  FlaskConical,
-  Leaf,
-  Mail,
-  ShieldCheck,
-  Sparkles,
-  Wheat,
-} from "lucide-react";
+import { ArrowDown, ArrowUpRight, Check, ChevronDown, FlaskConical, Leaf, Mail, ShieldCheck, Sparkles, Wheat } from "lucide-react";
 
 const CHECKOUT = "https://pay.hotmart.com/O107466069Q?checkoutMode=10&bid=1788507646008";
-const COVER = "/assets/updated-book-cover.png";
-const HERO = "/assets/medizin-hero.jpg";
-const ORGANS = "/assets/medizin-organs.jpg";
-const APPLICATIONS = "/assets/medizin-applications.jpg";
-const CREATOR = "/assets/creator-character.jpg";
-const OPEN_BOOK = "/assets/open-book.png";
-const OPEN_BOOK_RECIPE = "/assets/open-book-recipe.png";
-const PRICE_ART = "/assets/premium-book-price.jpeg";
-const GUARANTEE_SEAL = "/assets/premium-guarantee-seal.png";
+const HERO = "/assets/nature-hero.jpg";
+const HERBS = "/assets/nature-carousel-herbs.jpg";
+const INFUSIONS = "/assets/nature-carousel-infusions.jpg";
+const ORGANS = "/assets/nature-organs.jpg";
+const PREPARATION = "/assets/nature-preparation.jpg";
 
-type Locale = "de";
+type Locale = "de" | "pt";
 
 const copy = {
   de: {
     nav: { contents: "Inhalt", method: "Methode", offer: "Angebot", faq: "FAQ" },
     heroEyebrow: "DAS VERBORGENE WISSEN DER NATUR",
-    heroTitle: "Millionen werden für chemische Medikamente zur Behandlung Ihrer Beschwerden ausgegeben – doch die wirkliche Heilung war schon immer in der Natur zu finden.",
-    heroText:
-      "Entdecken Sie das geheime Arsenal von über 300 uralten Rezepten zur Behandlung, Heilung und Kontrolle von Krankheiten in jedem Organ Ihres Körpers. Der schrittweise Prozess, der Arterien befreit, Leberentzündungen bekämpft, chronische Schmerzen lindert und Ihre Gesundheit von innen heraus wiederherstellt.",
-    heroCta: "Exemplar sichern",
-    heroNote: "Sofortiger digitaler Zugang · PDF-Format",
-    kicker: "01 / DER ANSATZ",
+    heroTitle: "Sie verdienen Milliarden an Ihrer Krankheit, doch die ultimative Heilung liegt schon immer auf der Erde.",
+    heroText: "Entdecken Sie das geheime Arsenal von über 300 uralten Rezepten zur Behandlung, Heilung und Umkehrung von Krankheiten in jedem Organ Ihres Körpers.",
+    heroSub: "Der schrittweise Prozess, der Arterien befreit, Leberentzündungen bekämpft, chronische Schmerzen lindert und Ihre Gesundheit von innen heraus regeneriert.",
+    heroCta: "Exemplar sichern", heroNote: "Sofortiger digitaler Zugang · PDF-Format", problemKicker: "01 / DAS PROBLEM",
     problemTitle: "Die Pharmaindustrie entwickelt keine Heilmittel, sie schafft Kunden.",
-    problemText:
-      "Wenn Sie heute an einer Krankheit leiden, beantworten Sie diese Frage ehrlich: Hat das Medikament, das Sie einnehmen, Ihr Problem gelöst, oder müssen Sie es Ihr Leben lang nehmen? Die moderne Medizin ist in Notfällen hervorragend, aber bei chronischen Krankheiten werden häufig nur Symptome unterdrückt. Ihre Vorfahren wussten, wie man mit natürlichen Heilmitteln achtsam mit dem Körper umgeht.",
-    pull: "Schluss mit schwarzen Pillen und ihren verheerenden Nebenwirkungen!",
-    productKicker: "02 / DAS BUCH",
-    productTitle: "Die praktischen Gesundheitsrichtlinien unserer Vorfahren: natürliche Behandlungen und Heilmittel.",
-    productText:
-      "Wir haben über 300 traditionelle Heilrezepte zusammengestellt, die auf überliefertem Wissen basieren. Eine präzise Schritt-für-Schritt-Anleitung mit genauen Zutaten, Extraktionsmethoden und praktischen Anwendungshinweisen.",
-    productPoints: ["300 nummerierte Lösungen", "Tees, Garrafadas, Bäder, Salben und Kompressen", "Kompakte Schritt-für-Schritt-Anleitungen", "Digitales PDF zum sofortigen Lesen"],
-    learnKicker: "03 / WAS SIE ENTDECKEN",
-    learnTitle: "Ein klarer Weg durch die natürliche Hausapotheke.",
-    learnText: "Die Inhalte sind nach Körperbereichen und Alltagssituationen geordnet — vom ersten Blick bis zur praktischen Anwendung.",
-    categories: [
-      ["Leber, Nieren und Gallenblase", "Intensive traditionelle Pflanzenkuren und natürliche Ressourcen für die tägliche Pflanzenkunde."],
-      ["Herz und Kreislaufsystem", "Überlieferte Rezepturen und achtsame Routinen rund um Kreislauf und Wohlbefinden."],
-      ["Chronische Schmerzen und Entzündungen", "Traditionelle Anwendungen mit Kompressen, Bädern, Ölen und Salben."],
-      ["Chronische Erkrankungen und Beschwerden", "Unterstützende und vorbeugende Anwendungen als Ergänzung zur fachlichen Behandlung."],
-      ["Nervensystem und Immunsystem", "Rezepte zur Linderung von Unruhe, Schlafproblemen und zur Stärkung der natürlichen Widerstandskraft."],
-    ],
-    methodKicker: "04 / SO FUNKTIONIERT ES",
-    methodTitle: "Wie funktionieren die Schritt-für-Schritt-Anleitungen?",
-    methodText: "Keine Sorge, Sie benötigen keine medizinischen Vorkenntnisse. Die Anleitung ist intuitiv und leicht verständlich.",
-    methodCards: [
-      ["Genaue Zutaten", "Wurzeln, Blätter, Rinde und Samen, die Sie in Naturkostläden oder auf Wochenmärkten finden."],
-      ["Detaillierte Zubereitung", "Präzise Kochzeit, richtige Mengenverhältnisse und ein geeignetes Gefäß — verständlich erklärt."],
-      ["Praktische Anwendungstechniken", "Konzentrierte Aufgüsse, Tinkturen, dermatologische Salben, warme Kompressen und Sirupe."],
-    ],
-    offerKicker: "05 / IHR EXEMPLAR",
-    offerTitle: "Gesundheit zurückgewinnen zum Preis einer Packung Generika.",
-    pricePrefix: "Nur",
-    access: "Sofortiger digitaler Zugang im PDF-Format",
-    buy: "Jetzt Exemplar sichern",
-    guarantee: "Zufriedenheitsgarantie — volle Kostenübernahme",
-    guaranteeText: "15 Tage risikofrei testen. Kaufen Sie das Buch, entdecken Sie über 300 Rezepte und prüfen Sie in Ruhe, ob das Material zu Ihnen passt. Innerhalb von 15 Tagen können Sie eine Rückerstattung anfragen.",
-    faqKicker: "06 / HÄUFIGE FRAGEN",
-    faqTitle: "Alles Wichtige auf einen Blick.",
-    faqs: [
-      ["Lehrt das Buch, wie man schwere Erkrankungen behandelt?", "Das Buch vermittelt traditionelles Wissen zur Unterstützung, Vorbeugung und Linderung verschiedener Beschwerden und chronischer Schmerzen und dient als Ergänzung zur ärztlichen Behandlung."],
-      ["Wo finde ich die Heilpflanzen?", "Viele natürliche Ressourcen finden Sie auf Märkten, Wochenmärkten sowie in Geschäften und Online-Shops für Naturprodukte."],
-      ["Wie erhalte ich Zugriff?", "Das Material ist ein hochwertiges E-Book im PDF-Format. Die Lieferung erfolgt automatisch und umgehend per E-Mail, sobald die Zahlung bestätigt wurde."],
-      ["Kann ich auf dem Smartphone lesen?", "Ja. Das PDF ist für Smartphone, Tablet und Computer geeignet."],
-    ],
-    finalTitle: "Treffen Sie heute die Entscheidung für ein bewussteres, natürlicheres Leben.",
-    finalCta: "Sichern Sie sich jetzt Ihr Exemplar",
-    footer: "Medizin der Natur · Gruppe für natürliche Heilmethoden",
-    disclaimer: "Traditionelles Informationsmaterial. Es ersetzt keine individuelle Beratung durch medizinisches Fachpersonal.",
-    language: "Sprache",
+    problemText: "Wenn Sie heute an einer Krankheit leiden, beantworten Sie die Frage ehrlich: Hat das Medikament, das Sie einnehmen, Ihr Problem gelöst – oder müssen Sie es Ihr Leben lang einnehmen? Die moderne Medizin ist in Notfällen hervorragend, hat aber bei der Behandlung chronischer Krankheiten versagt. Sie kaschiert nur die Symptome, während das eigentliche Problem Ihre Organe unbemerkt weiter zerstört.",
+    pull: "Schluss mit der Abhängigkeit von schwarzen Pillen und ihren verheerenden Nebenwirkungen.", productKicker: "02 / DAS PRODUKT",
+    productTitle: "Die praktische Enzyklopädie der Gesundheit unserer Ahnen: natürliche Behandlungen und Heilmittel",
+    productText: "Dies ist das Buch, das das medizinische System am liebsten aus dem Internet verbannen würde. Wir haben über 300 traditionelle Heilrezepte zusammengetragen, die sich über Jahrhunderte bewährt haben und auf überliefertem Wissen beruhen. Eine präzise Schritt-für-Schritt-Anleitung mit genauen Zutaten, Extraktionsmethoden und praktischen Anwendungshinweisen.",
+    productPoints: ["Über 300 traditionelle Rezepte", "Genaue Zutaten und Extraktionsmethoden", "Schritt-für-Schritt-Anleitungen", "Praktische Anwendungshinweise"], learnKicker: "03 / WAS SIE LERNEN WERDEN",
+    learnTitle: "Was Sie lernen werden, um die Ursache direkt zu behandeln:", learnText: "Ihre Vorfahren wussten genau, wie man das Blut reinigt, Entzündungen im Gewebe bekämpft und kranke Organe regeneriert – ausschließlich mit natürlichen Mitteln.",
+    categories: [["Leber, Nieren und Gallenblase", "Tiefgreifende Entgiftungsprotokolle zur Beseitigung von Fettleber, Nierensteinen und über Jahre angesammelten Giftstoffen."], ["Herz und Kreislaufsystem", "Natürliche Heilmittel zur Befreiung der Arterien, zur Blutdruckregulierung und zur Blutreinigung."], ["Chronische Schmerzen und Entzündungen", "Wirksame, traditionelle Schmerzmittel gegen Arthritis, Arthrose, Bandscheibenvorfälle und Muskelschmerzen."], ["Chronische Erkrankungen und Beschwerden", "Unterstützende und vorbeugende Behandlungen bei Diabetes, Schilddrüsenproblemen, Gastritis, Reflux und Magengeschwüren."], ["Nervensystem und Immunität", "Rezepte zur Linderung von Angstzuständen, zur Beendigung chronischer Schlaflosigkeit und zur Stärkung der körpereigenen Abwehrkräfte."]],
+    methodKicker: "04 / SO FUNKTIONIERT ES", methodTitle: "Wie funktioniert die Schritt-für-Schritt-Anleitung?", methodText: "Keine Sorge, Sie benötigen keine medizinischen Vorkenntnisse. Die Anleitung ist intuitiv und kinderleicht zu bedienen.",
+    methodCards: [["Genaue Zutaten", "Wurzeln, Blätter, Rinde und Samen, die Sie auf jedem Naturkostmarkt oder Wochenmarkt finden."], ["Detaillierte Zubereitung", "Die genaue Kochzeit, die richtigen Mengenverhältnisse und die geeigneten Behälter, um den Verlust der Heilwirkung zu verhindern."], ["Praktische Anwendungstechniken", "Wie man konzentrierte Aufgüsse, Tinkturen mit Getreidealkohol, dermatologische Salben, warme Kompressen und hochwirksame Sirupe herstellt."]],
+    offerKicker: "05 / ANGEBOT", offerTitle: "Wiedererlangen Sie Ihre Gesundheit zum Preis einer Packung Generika:", price: "33 €", access: "Sofortiger digitaler Zugriff im PDF-Format", buy: "Sichern Sie sich jetzt Ihr Exemplar!", guarantee: "Zufriedenheitsgarantie – vollständig abgesichert!", guaranteeText: "15 Tage risikofrei testen! Kaufen Sie das Buch, stöbern Sie in den über 300 Rezepten und testen Sie die Behandlungen. Sollten Sie innerhalb von 15 Tagen feststellen, dass die Inhalte Ihre Gesundheit oder die Ihrer Familie nicht verbessern können, senden Sie uns eine E-Mail. Wir erstatten Ihnen umgehend 100 % des Kaufpreises zurück.",
+    faqKicker: "06 / HÄUFIGE FRAGEN", faqTitle: "Häufig gestellte Fragen / FAQ", faqs: [["Lehrt das Buch, wie man schwere Erkrankungen behandelt?", "Das Buch vermittelt traditionelles Wissen zur Unterstützung, Vorbeugung und Linderung verschiedener schwerer Erkrankungen und chronischer Schmerzen und dient als wirksame Ergänzung zur ärztlichen Behandlung."], ["Wo finde ich die Heilpflanzen?", "Sie finden diese auf Märkten, Wochenmärkten oder in Geschäften und Online-Shops für Naturprodukte."], ["Wie erhalte ich Zugriff?", "Das Material ist ein hochwertiges E-Book im PDF-Format. Die Lieferung erfolgt automatisch und umgehend per E-Mail, sobald die Zahlung bestätigt ist."]],
+    finalTitle: "Treffen Sie heute die Entscheidung für ein gesünderes, freieres und längeres Leben.", finalCta: "Sichern Sie sich jetzt Ihr Exemplar!", footer: "Medizin der Natur · Gruppe für natürliche Heilmethoden", disclaimer: "Traditionelles Informationsmaterial. Es ersetzt keine individuelle Beratung durch medizinisches Fachpersonal.", legal: "Rechtliche Hinweise"
   },
+  pt: {
+    nav: { contents: "Conteúdo", method: "Método", offer: "Oferta", faq: "FAQ" }, heroEyebrow: "O CONHECIMENTO OCULTO DA NATUREZA", heroTitle: "A indústria lucra bilhões com a sua doença, mas a cura definitiva sempre esteve na Terra.", heroText: "Descubra um arsenal secreto com mais de 300 receitas ancestrais para apoiar o cuidado, a prevenção e o alívio de problemas em todo o organismo.", heroSub: "Um processo passo a passo baseado em ingredientes naturais e conhecimento tradicional.", heroCta: "Garantir exemplar", heroNote: "Acesso digital imediato · Formato PDF", problemKicker: "01 / O PROBLEMA", problemTitle: "A indústria farmacêutica não cria curas, cria clientes.", problemText: "A medicina moderna é excelente em emergências, mas o cuidado de condições crônicas exige atenção contínua e acompanhamento profissional. Este material reúne conhecimento tradicional para apoiar escolhas mais conscientes e naturais.", pull: "Conheça uma abordagem mais natural para o cuidado diário.", productKicker: "02 / O PRODUTO", productTitle: "A enciclopédia prática da saúde dos nossos antepassados: tratamentos e remédios naturais", productText: "Reunimos mais de 300 receitas tradicionais baseadas em conhecimento transmitido ao longo dos séculos, com ingredientes, métodos de preparo e orientações práticas.", productPoints: ["Mais de 300 receitas tradicionais", "Ingredientes e métodos detalhados", "Guias passo a passo", "Orientações práticas"], learnKicker: "03 / O QUE VOCÊ VAI APRENDER", learnTitle: "Conhecimento tradicional organizado por áreas do corpo.", learnText: "Uma visão clara para pesquisar ingredientes e práticas naturais com responsabilidade.", categories: [["Fígado, rins e vesícula", "Protocolos tradicionais e recursos naturais para o cuidado diário."], ["Coração e circulação", "Rotinas naturais voltadas ao bem-estar e à circulação."], ["Dores e inflamações", "Aplicações tradicionais com compressas, banhos, óleos e pomadas."], ["Condições crônicas", "Práticas de apoio e prevenção como complemento ao acompanhamento profissional."], ["Sistema nervoso e imunidade", "Receitas para relaxamento, sono e fortalecimento da resistência natural."]], methodKicker: "04 / COMO FUNCIONA", methodTitle: "Como funciona o guia passo a passo?", methodText: "Você não precisa de conhecimento médico prévio. O material é organizado de forma intuitiva.", methodCards: [["Ingredientes precisos", "Raízes, folhas, cascas e sementes encontradas em mercados e lojas naturais."], ["Preparo detalhado", "Tempos, proporções e recipientes explicados de forma simples."], ["Técnicas práticas", "Infusões, tinturas, pomadas, compressas e xaropes tradicionais." ]], offerKicker: "05 / OFERTA", offerTitle: "Recupere sua atenção à saúde pelo preço de uma embalagem de genérico:", price: "33 €", access: "Acesso digital imediato em PDF", buy: "Garanta seu exemplar!", guarantee: "Garantia de satisfação", guaranteeText: "Teste o material sem risco por 15 dias. Se ele não fizer sentido para você, entre em contato para solicitar o reembolso conforme as condições da oferta.", faqKicker: "06 / PERGUNTAS FREQUENTES", faqTitle: "Tudo o que você precisa saber", faqs: [["O livro substitui um médico?", "Não. O material reúne conhecimento tradicional e não substitui diagnóstico, tratamento ou orientação de profissionais de saúde."], ["Onde encontro as plantas?", "Em feiras, mercados, lojas de produtos naturais e lojas online especializadas."], ["Como recebo o acesso?", "O e-book em PDF é enviado automaticamente por e-mail após a confirmação do pagamento."]], finalTitle: "Escolha hoje uma vida mais saudável, livre e longa.", finalCta: "Garanta seu exemplar", footer: "Medizin der Natur · Conhecimento natural", disclaimer: "Material informativo tradicional. Não substitui orientação médica individual.", legal: "Avisos legais"
+  }
 } as const;
 
-function SectionLabel({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
-  return <div className={`section-label ${light ? "section-label--light" : ""}`}>{children}</div>;
-}
-
-function AppLink({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return (
-    <a className={`cta ${className}`} href={CHECKOUT} target="_blank" rel="noreferrer">
-      {children}
-      <ArrowUpRight size={17} strokeWidth={2.2} />
-    </a>
-  );
-}
+function SectionLabel({ children, light = false }: { children: React.ReactNode; light?: boolean }) { return <div className={`section-label ${light ? "section-label--light" : ""}`}>{children}</div>; }
+function AppLink({ children, className = "" }: { children: React.ReactNode; className?: string }) { return <a className={`cta ${className}`} href={CHECKOUT} target="_blank" rel="noreferrer">{children}<ArrowUpRight size={17} /></a>; }
 
 export default function Home() {
-  const locale: Locale = "de";
-  const [openFaq, setOpenFaq] = useState(0);
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const [legalOpen, setLegalOpen] = useState(false);
-
-  const carouselItems = [
-    { src: COVER, alt: "Medizin der Natur — Buchcover" },
-    { src: CREATOR, alt: "Der Autor mit dem Buch in der Natur" },
-    { src: OPEN_BOOK, alt: "Aufgeschlagenes Buch mit natürlicher Rezeptur" },
-    { src: OPEN_BOOK_RECIPE, alt: "Aufgeschlagene Rezeptseite mit Ingwer-Zitronen-Tee" },
-  ];
-
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setCarouselIndex((current) => (current + 1) % carouselItems.length);
-    }, 4200);
-    return () => window.clearInterval(timer);
-  }, [carouselItems.length]);
-
+  const browserLocale = typeof navigator !== "undefined" ? navigator.languages?.find((l) => l.toLowerCase().startsWith("pt") || l.toLowerCase().startsWith("de")) : undefined;
+  const [locale, setLocale] = useState<Locale>(browserLocale?.toLowerCase().startsWith("pt") ? "pt" : "de");
+  const [openFaq, setOpenFaq] = useState(0); const [menuOpen, setMenuOpen] = useState(false); const [carouselIndex, setCarouselIndex] = useState(0); const [legalOpen, setLegalOpen] = useState(false);
   const t = copy[locale];
-  const categoryIcons = useMemo(() => ["✦", "◌", "✧", "◈", "⋆"], []);
-
-  return (
-    <div className="site-shell">
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Medizin der Natur">
-          <span className="brand-mark"><Leaf size={16} /></span>
-          <span>MEDIZIN <b>DER NATUR</b></span>
-        </a>
-        <nav className={`top-nav ${menuOpen ? "top-nav--open" : ""}`}>
-          <a href="#buch" onClick={() => setMenuOpen(false)}>{t.nav.contents}</a>
-          <a href="#methode" onClick={() => setMenuOpen(false)}>{t.nav.method}</a>
-          <a href="#angebot" onClick={() => setMenuOpen(false)}>{t.nav.offer}</a>
-          <a href="#faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a>
-        </nav>
-        <div className="header-actions">
-          <AppLink className="cta--small">{t.heroCta}</AppLink>
-          <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu"><span /><span /></button>
-        </div>
-      </header>
-
-      <main id="top">
-        <section className="hero" style={{ backgroundImage: `linear-gradient(90deg, rgba(6,18,12,.97) 0%, rgba(6,18,12,.83) 39%, rgba(6,18,12,.16) 70%, rgba(6,18,12,.20) 100%), url(${HERO})` }}>
-          <div className="hero-inner">
-            <div className="hero-copy">
-              <SectionLabel light><Sparkles size={14} /> {t.heroEyebrow}</SectionLabel>
-              <h1>{t.heroTitle}</h1>
-              <p className="hero-lead">{t.heroText}</p>
-              <div className="hero-actions">
-                <AppLink>{t.heroCta}</AppLink>
-                <a href="#buch" className="text-link">Mehr erfahren <ArrowDown size={16} /></a>
-              </div>
-              <p className="hero-note"><ShieldCheck size={14} /> {t.heroNote}</p>
-            </div>
-            <div className="hero-product">
-              <div className="halo" />
-              <div className="hero-carousel" aria-roledescription="carousel" aria-label="Buch- und Inhaltsbilder">
-                <div className="hero-carousel-track" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>
-                  {carouselItems.map((item) => <div className="hero-carousel-slide" key={item.src}><img src={item.src} alt={item.alt} /></div>)}
-                </div>
-                <div className="hero-carousel-controls">
-                  {carouselItems.map((item, i) => <button key={item.src} className={carouselIndex === i ? "is-active" : ""} onClick={() => setCarouselIndex(i)} aria-label={`Bild ${i + 1}`} />)}
-                </div>
-              </div>
-              <div className="hero-stamp"><strong>300</strong><span>NATÜRLICHE LÖSUNGEN</span></div>
-            </div>
-          </div>
-          <div className="hero-bottom-line"><span>GRUPPE FÜR NATÜRLICHE HEILMETHODEN</span><span>ÜBERLIEFERT · GEORDNET · PRAKTISCH</span></div>
-        </section>
-
-        <section className="statement section-cream">
-          <div className="statement-number">01</div>
-          <div className="statement-content">
-            <h2>{t.problemTitle}</h2>
-            <p>{t.problemText}</p>
-          </div>
-          <div className="statement-visual"><img src={OPEN_BOOK_RECIPE} alt="Aufgeschlagene Seite mit natürlicher Rezeptur" /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div>
-        </section>
-
-        <section id="buch" className="book-section section-dark">
-          <div className="book-copy">
-            <SectionLabel light>{t.productKicker}</SectionLabel>
-            <h2>{t.productTitle}</h2>
-            <p>{t.productText}</p>
-            <ul className="check-list">
-              {t.productPoints.map((point) => <li key={point}><span><Check size={15} /></span>{point}</li>)}
-            </ul>
-            <AppLink>{t.heroCta}</AppLink>
-          </div>
-          <div className="book-visual">
-            <div className="book-frame"><img src={COVER} alt="Aktuelles Cover des E-Books Medizin der Natur" /></div>
-            <div className="book-caption"><BookOpen size={18} /><span>Ein Nachschlagewerk für Ihre natürliche Hausapotheke</span></div>
-          </div>
-        </section>
-
-        <section className="discover section-cream">
-          <div className="discover-head"><div><SectionLabel>{t.learnKicker}</SectionLabel><h2>{t.learnTitle}</h2></div><p>{t.learnText}</p></div>
-          <div className="category-image" style={{ backgroundImage: `url(${ORGANS})` }}>
-            <div className="category-grid">
-              {t.categories.map(([title, text], i) => <article className="category-card" key={title}><span className="category-icon">{categoryIcons[i]}</span><h3>{title}</h3><p>{text}</p></article>)}
-            </div>
-          </div>
-        </section>
-
-        <section id="methode" className="method section-dark">
-          <div className="method-intro"><SectionLabel light>{t.methodKicker}</SectionLabel><h2>{t.methodTitle}</h2><p>{t.methodText}</p></div>
-          <div className="method-cards">
-            {[
-              [OPEN_BOOK, Wheat, t.methodCards[0]],
-              [OPEN_BOOK_RECIPE, FlaskConical, t.methodCards[1]],
-              [APPLICATIONS, Leaf, t.methodCards[2]],
-            ].map(([image, Icon, card]) => {
-              const [title, text] = card as readonly [string, string];
-              const IconComp = Icon as typeof Wheat;
-              return <article className="method-card" key={title}><img src={image as string} alt="" /><div className="method-card-body"><IconComp size={21} /><h3>{title}</h3><p>{text}</p></div></article>;
-            })}
-          </div>
-        </section>
-
-        <section id="angebot" className="offer section-cream">
-          <div className="offer-layout">
-            <div className="offer-copy"><SectionLabel>{t.offerKicker}</SectionLabel><h2>{t.offerTitle}</h2><img className="price-art" src={PRICE_ART} alt="33 Euro und sofortiger digitaler Zugang im PDF-Format" /><AppLink className="cta--gold">{t.buy}</AppLink></div>
-            <div className="guarantee-card"><img className="guarantee-seal-image" src={GUARANTEE_SEAL} alt="Premium-Garantie-Siegel" /><div><h3>{t.guarantee}</h3><p>{t.guaranteeText}</p></div></div>
-          </div>
-        </section>
-
-        <section id="faq" className="faq section-cream">
-          <div className="faq-head"><SectionLabel>{t.faqKicker}</SectionLabel><h2>{t.faqTitle}</h2></div>
-          <div className="faq-list">
-            {t.faqs.map(([question, answer], i) => <div className={`faq-item ${openFaq === i ? "faq-item--open" : ""}`} key={question}><button onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{question}</span><ChevronDown size={19} /></button><div className="faq-answer"><p>{answer}</p></div></div>)}
-          </div>
-        </section>
-
-        <section className="final-cta" style={{ backgroundImage: `linear-gradient(90deg, rgba(8,25,16,.96), rgba(8,25,16,.68)), url(${HERO})` }}>
-          <Leaf size={26} /><h2>{t.finalTitle}</h2><AppLink>{t.finalCta}</AppLink>
-        </section>
-      </main>
-
-      <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>Rechtliche Hinweise</button><a href={`mailto:unterstutzung.service@gmail.com`}><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>
-      {legalOpen && <div className="legal-modal-backdrop" role="presentation" onClick={() => setLegalOpen(false)}><section className="legal-modal" role="dialog" aria-modal="true" aria-labelledby="legal-title" onClick={(event) => event.stopPropagation()}><button className="legal-close" onClick={() => setLegalOpen(false)} aria-label="Schließen">×</button><SectionLabel>RECHTLICHE HINWEISE</SectionLabel><h2 id="legal-title">Hinweise zum digitalen Material</h2><p>Dieses E-Book dient der allgemeinen Information über traditionelles Pflanzenwissen. Die Inhalte ersetzen keine individuelle medizinische Beratung, Diagnose oder Behandlung.</p><p>Bitte prüfen Sie Zutaten, Allergien und persönliche Verträglichkeit sorgfältig und wenden Sie sich bei gesundheitlichen Fragen an qualifiziertes Fachpersonal.</p></section></div>}
-    </div>
-  );
+  const carouselItems = useMemo(() => [{ src: HERBS, alt: "Heilkräuter, Wurzeln und Samen" }, { src: INFUSIONS, alt: "Natürliche Kräuterinfusion mit Ingwer und Zitrone" }, { src: PREPARATION, alt: "Zutaten und Utensilien für die Zubereitung" }], []);
+  useEffect(() => { document.documentElement.lang = locale; const timer = window.setInterval(() => setCarouselIndex((i) => (i + 1) % carouselItems.length), 4200); return () => window.clearInterval(timer); }, [carouselItems.length, locale]);
+  return <div className="site-shell"><header className="site-header"><a className="brand" href="#top"><span className="brand-mark"><Leaf size={16} /></span><span>MEDIZIN <b>DER NATUR</b></span></a><nav className={`top-nav ${menuOpen ? "top-nav--open" : ""}`}><a href="#buch" onClick={() => setMenuOpen(false)}>{t.nav.contents}</a><a href="#methode" onClick={() => setMenuOpen(false)}>{t.nav.method}</a><a href="#angebot" onClick={() => setMenuOpen(false)}>{t.nav.offer}</a><a href="#faq" onClick={() => setMenuOpen(false)}>{t.nav.faq}</a></nav><div className="header-actions"><button className="language-toggle" onClick={() => setLocale(locale === "de" ? "pt" : "de")} aria-label="Sprache wechseln">{locale.toUpperCase()}</button><AppLink className="cta--small">{t.heroCta}</AppLink><button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu"><span /><span /></button></div></header>
+  <main id="top"><section className="hero" style={{ backgroundImage: `linear-gradient(90deg, rgba(6,18,12,.97) 0%, rgba(6,18,12,.83) 39%, rgba(6,18,12,.16) 70%, rgba(6,18,12,.20) 100%), url(${HERO})` }}><div className="hero-inner"><div className="hero-copy"><SectionLabel light><Sparkles size={14} /> {t.heroEyebrow}</SectionLabel><h1>{t.heroTitle}</h1><p className="hero-lead">{t.heroText}</p><p className="hero-lead hero-lead--secondary">{t.heroSub}</p><div className="hero-actions"><AppLink>{t.heroCta}</AppLink><a href="#buch" className="text-link">{t.nav.contents} <ArrowDown size={16} /></a></div><p className="hero-note"><ShieldCheck size={14} /> {t.heroNote}</p></div><div className="hero-product"><div className="halo" /><div className="hero-carousel" aria-roledescription="carousel" aria-label="Bilder zu Heilpflanzen und Zubereitung"><div className="hero-carousel-track" style={{ transform: `translateX(-${carouselIndex * 100}%)` }}>{carouselItems.map((item) => <div className="hero-carousel-slide" key={item.src}><img src={item.src} alt={item.alt} /></div>)}</div><div className="hero-carousel-controls">{carouselItems.map((item, i) => <button key={item.src} className={carouselIndex === i ? "is-active" : ""} onClick={() => setCarouselIndex(i)} aria-label={`Bild ${i + 1}`} />)}</div></div><div className="hero-stamp"><strong>300+</strong><span>NATÜRLICHE REZEPTE</span></div></div></div><div className="hero-bottom-line"><span>GRUPPE FÜR NATÜRLICHE HEILMETHODEN</span><span>ÜBERLIEFERT · GEORDNET · PRAKTISCH</span></div></section>
+  <section className="statement section-cream"><div className="statement-number">01</div><div className="statement-content"><SectionLabel>{t.problemKicker}</SectionLabel><h2>{t.problemTitle}</h2><p>{t.problemText}</p></div><div className="statement-visual"><img src={INFUSIONS} alt="Natürliche Kräuterinfusion" /><div className="statement-pull"><Leaf size={24} /><span>{t.pull}</span></div></div></section>
+  <section id="buch" className="book-section section-dark"><div className="book-copy"><SectionLabel light>{t.productKicker}</SectionLabel><h2>{t.productTitle}</h2><p>{t.productText}</p><ul className="check-list">{t.productPoints.map((point) => <li key={point}><span><Check size={15} /></span>{point}</li>)}</ul><AppLink>{t.heroCta}</AppLink></div><div className="book-visual book-visual--nature"><img src={ORGANS} alt="Pflanzen und natürliche Ressourcen in organischer Anordnung" /><div className="book-caption"><Leaf size={18} /><span>Überliefertes Wissen, modern geordnet</span></div></div></section>
+  <section className="discover section-cream"><div className="discover-head"><div><SectionLabel>{t.learnKicker}</SectionLabel><h2>{t.learnTitle}</h2></div><p>{t.learnText}</p></div><div className="category-image" style={{ backgroundImage: `url(${ORGANS})` }}><div className="category-grid">{t.categories.map(([title, text], i) => <article className="category-card" key={title}><span className="category-icon">{["✦", "◌", "✧", "◈", "⋆"][i]}</span><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+  <section id="methode" className="method section-dark"><div className="method-intro"><SectionLabel light>{t.methodKicker}</SectionLabel><h2>{t.methodTitle}</h2><p>{t.methodText}</p></div><div className="method-cards">{[[HERBS, Wheat, t.methodCards[0]], [INFUSIONS, FlaskConical, t.methodCards[1]], [PREPARATION, Leaf, t.methodCards[2]]].map(([image, Icon, card]) => { const [title, text] = card as readonly [string, string]; const IconComp = Icon as typeof Wheat; return <article className="method-card" key={title}><img src={image as string} alt="" /><div className="method-card-body"><IconComp size={21} /><h3>{title}</h3><p>{text}</p></div></article>; })}</div></section>
+  <section id="angebot" className="offer section-cream"><div className="offer-layout"><div className="offer-copy"><SectionLabel>{t.offerKicker}</SectionLabel><h2>{t.offerTitle}</h2><div className="price-panel"><span className="price-label">{locale === "de" ? "SICHERN SIE SICH JETZT IHR EXEMPLAR" : "GARANTA AGORA SEU EXEMPLAR"}</span><strong>{t.price}</strong><span>{t.access}</span></div><AppLink className="cta--gold">{t.buy}</AppLink></div><div className="guarantee-card"><div className="guarantee-seal">15<br /><small>TAGE</small></div><div><h3>{t.guarantee}</h3><p>{t.guaranteeText}</p></div></div></div></section>
+  <section id="faq" className="faq section-cream"><div className="faq-head"><SectionLabel>{t.faqKicker}</SectionLabel><h2>{t.faqTitle}</h2></div><div className="faq-list">{t.faqs.map(([question, answer], i) => <div className={`faq-item ${openFaq === i ? "faq-item--open" : ""}`} key={question}><button onClick={() => setOpenFaq(openFaq === i ? -1 : i)}><span>{question}</span><ChevronDown size={19} /></button><div className="faq-answer"><p>{answer}</p></div></div>)}</div></section><section className="final-cta" style={{ backgroundImage: `linear-gradient(90deg, rgba(8,25,16,.96), rgba(8,25,16,.68)), url(${HERO})` }}><Leaf size={26} /><h2>{t.finalTitle}</h2><AppLink>{t.finalCta}</AppLink></section></main>
+  <footer className="site-footer"><div className="footer-brand"><span className="brand-mark"><Leaf size={15} /></span><span>{t.footer}</span></div><p>{t.disclaimer}</p><div className="footer-links"><button className="legal-link" onClick={() => setLegalOpen(true)}>{t.legal}</button><a href="mailto:unterstutzung.service@gmail.com"><Mail size={14} /> kontakt@medizin-der-natur.de</a></div></footer>{legalOpen && <div className="legal-modal-backdrop" onClick={() => setLegalOpen(false)}><section className="legal-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}><button className="legal-close" onClick={() => setLegalOpen(false)} aria-label="Schließen">×</button><SectionLabel>{t.legal}</SectionLabel><h2>Hinweise zum digitalen Material</h2><p>{t.disclaimer}</p><p>Bitte prüfen Sie Zutaten, Allergien und persönliche Verträglichkeit sorgfältig und wenden Sie sich bei gesundheitlichen Fragen an qualifiziertes Fachpersonal.</p></section></div>}</div>;
 }
